@@ -38,4 +38,13 @@ describe("Person class", () => {
       "bag must be an instance of the Bag"
     );
   });
+
+  it("getBags should return the bags array", () => {
+    const person = new Person("Dash", "Italy");
+    const bag = new Bag(30, 3);
+    person.addBag(bag);
+    const result = person.getBags();
+    expect(result.length).toBe(1);
+    expect(result).toEqual([{ weight: 30, id: 3 }]);
+  });
 });

@@ -20,8 +20,8 @@ describe("Airport class", () => {
 
   it("addPlane should update the planes array properly", () => {
     const airport = new Airport("Dashport");
-    const plane1 = new Plane("Dash-Airlines", "Italy");
-    const plane2 = new Plane("British-Airlines", "USA");
+    const plane1 = new Plane("Dash-Airlines", "Italy", Airport.airportCode);
+    const plane2 = new Plane("British-Airlines", "USA", Airport.airportCode);
     airport.addPlane(plane1);
     airport.addPlane(plane2);
 
@@ -46,5 +46,22 @@ describe("Airport class", () => {
     expect(() => airport.addPlane(plane)).toThrow(
       "plane must be an instance of Plane"
     );
+  });
+
+  it("getPlanes should return the correct planes array", () => {
+    const airport = new Airport("Dashport");
+    const plane = new Plane("Dash-Airlines", "Italy", Airport.airportCode);
+    airport.addPlane(plane);
+    const result = airport.getPlanes();
+
+    expect(result.length).toBe(1);
+    expect(result).toEqual([
+      {
+        company: "Dash-Airlines",
+        destination: "Italy",
+        origin: "JFK",
+        passengers: [],
+      },
+    ]);
   });
 });
